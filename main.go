@@ -31,7 +31,7 @@ func main() {
 }
 
 type User struct {
-	Username string `json:"username"`
+	Username string `json:"usrname"`
 	Pwd      string `son:"pwd"`
 }
 
