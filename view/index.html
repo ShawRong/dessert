@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>login</title>
+		<script type=text/javascript src="./static/js/vue.js"></script>
+		<script type=text/javascript  src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	</head>
+	<body>
+		<div id="ta">
+			<table border="0">
+				<tr>
+					<td>用户名</td>
+					<td> <input type="text" v-model="usrname"/> </td>
+				</tr>
+				<tr>
+					<td>密码</td>
+					<td><input type="password" v-model="pwd"/> </td>
+				</tr>
+			</table>
+			<input type="button" value="登录" v-on:click="login"/>
+		</div>
+		<script>
+			new Vue({
+				el:'#ta',
+				data:{
+					usrname:'',
+					pwd:'',
+					msg1:'',
+					msg2:'',
+					msg:'',
+				},
+				methods:{
+					login:function(){
+						this.msg1 = '用户名：'+this.usrname+'\n';
+						this.msg2 = '密码：'+this.pwd;
+						this.msg = this.msg1 + this.msg2;
+						alert(this.msg);
+						axios.post("/temp",
+						{
+							usrname:this.usrname,
+							pwd:this.pwd
+						}).then(function(res){
+							console.log(res)
+						}).catch(function(err){
+							console.log("请求失败")
+						});
+					}
+				}
+			})
+		</script>
+	</body>
+</html>
