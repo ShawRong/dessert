@@ -14,7 +14,8 @@ type Response struct {
 }
 
 func main() {
-	app := iris.New()                                   // 实例一个iris对象
+	app := iris.New() // 实例一个iris对象
+	app.Favicon("./favicons/favicon.ico")
 	app.RegisterView(iris.HTML("./view", ".html"))      //资源库
 	app.HandleDir("/static", iris.Dir("./view/static")) //静态文件
 
@@ -42,7 +43,7 @@ func main() {
 	})
 
 	// /user/{name}/getquestion
-	userRouter.Get("/{name:string}/getquestion", RandGenerate)
+	userRouter.Post("/{name:string}/getquestion", RandGenerate)
 
 	// 路由分组
 	party := app.Party("/hello")
@@ -72,9 +73,11 @@ func UserLogin(ctx iris.Context) {
 
 	ctx.StatusCode(iris.StatusOK)
 	if aul.Username == "Name" && aul.Pwd == "NAME" {
-		ctx.WriteString("Nice")
+		data := "Nice"
+		_, _ = ctx.JSON(Response{Status: true, Data: data})
 	} else {
-		ctx.WriteString("Bad")
+		data := "Bad"
+		_, _ = ctx.JSON(Response{Status: true, Data: data})
 	}
 	return
 }
