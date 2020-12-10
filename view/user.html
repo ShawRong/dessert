@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>user</title>
+		<script src="./static/js/vue.js"></script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<div id="puzzle1">
+				<span v-text="puzzle"></span>
+				<input type="text" pattern="([0-9])*(\.)?([0-9])+" v-model="input1"/>
+				<button id="button1" v-on:click="jug">提交</button>
+				<br />
+				<span v-text="istrue1"></span>
+			</div>
+		</div>
+		<script>
+			var root = new Vue({
+				el:'#app',
+				data:{
+					x:'',
+					y:'',
+					sig:'',
+					res:'',
+					puzzle:'',
+					istrue1:'',
+					input1:'',
+				},
+				methods:{
+					jug:function()
+					{
+						if(this.res==this.input1)
+						{
+							this.istrue1="true";
+						}
+						else
+						{
+							this.istrue1="false";
+						}
+					}
+				}
+			})
+			axios.post("/user/{name}/getquestion",
+			{
+				
+			}).then(function(res){
+				root.x=res.X;
+				root.y=res.Y;
+				root.sig=res.Sig;
+				root.res=res.Res;
+				root.puzzle=root.x+root.sig+root.y;
+			}).catch(function(err){
+				console.log("请求失败")
+			});
+		</script>
+	</body>
+</html>
