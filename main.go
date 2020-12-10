@@ -30,10 +30,11 @@ func main() {
 	//用户登录成功请求下一个界面
 	// /user/{name}/home
 	userRouter := app.Party("/user")
-	userRouter.Get("/{name:string}/home", func(ctx iris.Context) {
-		name := ctx.Params().Get("name")
-		ctx.Writef("%s", name)
-		ctx.View("user.html")
+	userRouter.Get("/{name:string}/home/user.html", func(ctx iris.Context) {
+		ctx.ServeFile("./view/user.html")
+	})
+	userRouter.Get("/{name:string}/home/static/js/vue.js", func(ctx iris.Context) {
+		ctx.ServeFile("./view/static/js/vue.js")
 	})
 
 	// /user/{name}/getname

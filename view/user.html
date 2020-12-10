@@ -46,10 +46,10 @@
 			{
 				
 			}).then(function(res){
-				root.x=res.X;
-				root.y=res.Y;
-				root.sig=res.Sig;
-				root.res=res.Res;
+				root.x=res.data.X;
+				root.y=res.data.Y;
+				root.sig=res.data.Sig;
+				root.res=res.data.Res;
 				root.puzzle=root.x+root.sig+root.y;
 			}).catch(function(err){
 				console.log("请求失败")

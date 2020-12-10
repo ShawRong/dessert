@@ -22,7 +22,7 @@
 			<input type="button" value="登录" v-on:click="login"/>
 		</div>
 		<script>
-			new Vue({
+			var root = new Vue({
 				el:'#ta',
 				data:{
 					usrname:'',
@@ -30,6 +30,7 @@
 					msg1:'',
 					msg2:'',
 					msg:'',
+					homeurl:'',
 				},
 				methods:{
 					login:function(){
@@ -42,13 +43,15 @@
 							usrname:this.usrname,
 							pwd:this.pwd
 						}).then(function(res){
-							if(res.data == "Nice")
+							if(res.data.data == "Nice")
 							{
-								axios.get("/user/{name}/home",
+								root.homeurl = '/user/' + root.usrname + '/home/user.html';
+								alert(root.homeurl)
+								axios.get(root.homeurl,
 								{
 									
 								}).then(function(res){
-									
+									location.href = window.location.href + 'user/' + root.usrname + '/home/user.html'
 								}).catch(function(err){
 									
 								})
