@@ -3,8 +3,9 @@
 	<head>
 		<meta charset="utf-8">
 		<title>login</title>
-		<script type=text/javascript src="./static/js/vue.js"></script>
-		<script type=text/javascript  src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<script src="./static/js/vue.js"></script>
+		<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	</head>
 	<body>
 		<div id="ta">
@@ -36,12 +37,26 @@
 						this.msg2 = '密码：'+this.pwd;
 						this.msg = this.msg1 + this.msg2;
 						alert(this.msg);
-						axios.post("/temp",
+						axios.post("/login",
 						{
 							usrname:this.usrname,
 							pwd:this.pwd
 						}).then(function(res){
-							console.log(res)
+							if(res.data == "Nice")
+							{
+								axios.get("/user/{name}/home",
+								{
+									
+								}).then(function(res){
+									
+								}).catch(function(err){
+									
+								})
+							}
+							else
+							{
+								alert("error")
+							}
 						}).catch(function(err){
 							console.log("请求失败")
 						});
