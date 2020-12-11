@@ -30,11 +30,15 @@ func main() {
 	//用户登录成功请求下一个界面
 	// /user/{name}/home
 	userRouter := app.Party("/user")
+	userRouter.RegisterView(iris.HTML("./view", ".html"))
 	userRouter.Get("/{name:string}/home/user.html", func(ctx iris.Context) {
 		ctx.ServeFile("./view/user.html")
 	})
 	userRouter.Get("/{name:string}/home/static/js/vue.js", func(ctx iris.Context) {
 		ctx.ServeFile("./view/static/js/vue.js")
+	})
+	userRouter.Get("/{name:string}/home/static/css/css1.css", func(ctx iris.Context) {
+		ctx.ServeFile("./view/static/css/css1.css")
 	})
 
 	// /user/{name}/getname
@@ -54,8 +58,8 @@ func main() {
 	})
 
 	// 启动服务器
-	app.Run(iris.Addr(":8085"), iris.WithCharset("UTF-8"))
-	// 监听地址:本服务器上任意id端口8085,设置字符集utf8
+	app.Run(iris.Addr(":8080"), iris.WithCharset("UTF-8"))
+	// 监听地址:本服务器上任意id端口8080,设置字符集utf8
 }
 
 //login

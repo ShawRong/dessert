@@ -6,20 +6,25 @@
 		<script src="./static/js/vue.js"></script>
 		<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
 		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="./static/css/css1.css" />
 	</head>
 	<body>
 		<div id="ta">
-			<table border="0">
-				<tr>
-					<td>用户名</td>
-					<td> <input type="text" v-model="usrname"/> </td>
-				</tr>
-				<tr>
-					<td>密码</td>
-					<td><input type="password" v-model="pwd"/> </td>
-				</tr>
-			</table>
-			<input type="button" value="登录" v-on:click="login"/>
+			<div class="login">
+				<p class="logintext">login</p>
+				<table border="0" >
+					<tr>
+						<td>用户名</td>
+						<td> <input type="text" class="logininput" v-model="usrname"/> </td>
+					</tr>
+					<tr>
+						<td>密码</td>
+						<td><input type="password" class="logininput" v-model="pwd"/> </td>
+					</tr>
+				</table>
+				<input type="button" class="loginbutton" value="登录" v-on:click="login"/>
+				<input type="button" class="loginbutton" value="注册" v-on:click="signup"/>
+			</div>
 		</div>
 		<script>
 			var root = new Vue({
@@ -46,7 +51,6 @@
 							if(res.data.data == "Nice")
 							{
 								root.homeurl = '/user/' + root.usrname + '/home/user.html';
-								alert(root.homeurl)
 								axios.get(root.homeurl,
 								{
 									
